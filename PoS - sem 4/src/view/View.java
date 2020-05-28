@@ -1,6 +1,8 @@
 package view;
 
 import controller.Controller;
+import controller.OperationFailedException;
+import integration.InvalidItemIDException;
 import log.ExceptionLogHandler;
 import model.DTO.PresentSaleDTO;
 import model.DTO.SaleInformation;
@@ -74,8 +76,17 @@ public class View {
 			System.out.println("No of items: ");
 			quantity = input.nextInt(); 
 			
-			if(quantity>0)
-				displaySale = controller.findItem(itemID, quantity);
+			if(quantity>0) {
+				try {
+					displaySale = controller.findItem(itemID, quantity);
+				} catch(InvalidItemIDException e) {
+					System.out.println("invalid id");					
+				} catch(OperationFailedException oe) {
+					System.out.println();
+				}
+			}
+				
+				
 			else
 				displaySale = null;
 			

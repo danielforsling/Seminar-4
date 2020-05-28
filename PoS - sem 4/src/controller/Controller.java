@@ -69,7 +69,8 @@ public class Controller {
 	 * @param quantity The quantity of the scanned item.
 	 * @return PresentSaleDTO that contains information about the sale.
 	 */
-	public PresentSaleDTO findItem(int itemID, int quantity) {
+	public PresentSaleDTO findItem(int itemID, int quantity) 
+								throws OperationFailedException, InvalidItemIDException {
 
 		PresentSaleDTO displaySale = null;
 	
@@ -77,10 +78,9 @@ public class Controller {
 		try {
 			itemToBeAdded = inventory.findItem(itemID);
 		} catch (InvalidItemIDException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw e;
 		} catch (ExternalSystemsFailureException e) {
-			System.out.println("ERROR");
+			throw new OperationFailedException("Operation failed", e);
 		}
 		
 		if(itemToBeAdded!=null) {

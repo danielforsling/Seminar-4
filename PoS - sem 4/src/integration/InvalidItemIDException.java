@@ -15,7 +15,7 @@ public class InvalidItemIDException extends Exception {
 	 * @param itemID Represents the invalid ID.
 	 */
 	public InvalidItemIDException(int itemID) {
-		super("The entered ID: " + itemID + " is invalid. No item found with matching ID.");
+		super("The entered ID: " + itemID + " is invalid.\nNo item found with matching ID.");
 		
 		this.invalidItemID = itemID;	
 	}

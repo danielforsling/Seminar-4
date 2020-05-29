@@ -1,5 +1,7 @@
 package startup;
 
+import java.io.IOException;
+
 import controller.Controller;
 import integration.CreateSystems;
 import integration.Printer;
@@ -19,9 +21,16 @@ public class Main {
 		CreateSystems system = new CreateSystems();
 		Printer printer = new Printer();
 		Controller controller = new Controller(system, printer);
-		View view = new View(controller);
+		View view;
+		try {
+			view = new View(controller);
+			view.userTestRun();
+		} catch (IOException e) {
+			System.out.println("Unable to start testrun");
+			e.printStackTrace();
+		}
 		
-		view.userTestRun();
+		
 	}
 
 }

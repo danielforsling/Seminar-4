@@ -22,7 +22,7 @@ public class DisplayErrorMessage {
 		StringBuilder sb = new StringBuilder();
 		sb.append("***Error Message***\n");
 		sb.append(message);
-		sb.append("*******************");
+		sb.append("\n*******************");
 		return sb.toString();
 	}
 	

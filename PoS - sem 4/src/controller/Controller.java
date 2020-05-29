@@ -68,6 +68,9 @@ public class Controller {
 	 * @param itemID Represent the unique ID that every type of item has.
 	 * @param quantity The quantity of the scanned item.
 	 * @return PresentSaleDTO that contains information about the sale.
+	 * @throws InvalidItemIDException when searching with an invalid-id
+	 * @throws OperationFailedException when lost connection to external systems.
+	 * 				
 	 */
 	public PresentSaleDTO findItem(int itemID, int quantity) 
 								throws OperationFailedException, InvalidItemIDException {
@@ -81,7 +84,7 @@ public class Controller {
 			throw e;
 		} catch (ExternalSystemsFailureException e) {
 			
-			throw new OperationFailedException("Operation failed", e);
+			throw new OperationFailedException("Lost connection to the External systems", e);
 		}
 		
 		if(itemToBeAdded!=null) {

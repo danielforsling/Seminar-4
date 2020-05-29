@@ -8,6 +8,7 @@ import model.DTO.PresentSaleDTO;
 import model.DTO.SaleInformation;
 import model.util.Amount;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -24,8 +25,9 @@ public class View {
 	 * Creates a new instance.
 	 * @param controller
 	 */
-	public View(Controller controller){
+	public View(Controller controller) throws IOException {
 		this.controller = controller;
+		this.errorLog = new ExceptionLogHandler();
 		
 	}
 
@@ -82,10 +84,9 @@ public class View {
 				} catch(InvalidItemIDException e) {
 					System.out.println("invalid id");					
 				} catch(OperationFailedException oe) {
-					System.out.println();
+					System.out.println ();
 				}
 			}
-				
 				
 			else
 				displaySale = null;
@@ -93,5 +94,9 @@ public class View {
 			if(displaySale!=null)
 				System.out.println(displaySale.toString());
 		}
+	}
+	
+	private void LocalExceptionHandler(String message, Exception e) {
+		
 	}
 }

@@ -85,9 +85,9 @@ public class View {
 				try {
 					displaySale = controller.findItem(itemID, quantity);
 				} catch(InvalidItemIDException e) {
-					System.out.println("invalid id");					
+					errorMessages.showErrorMessage(e.getMessage());					
 				} catch(OperationFailedException oe) {
-					System.out.println ();
+					LocalExceptionHandler("Operation failed", oe);
 				}
 			}
 				
@@ -100,6 +100,7 @@ public class View {
 	}
 	
 	private void LocalExceptionHandler(String message, Exception e) {
-		
+		errorMessages.showErrorMessage(message);
+		errorLog.printExceptionToFile(e);
 	}
 }

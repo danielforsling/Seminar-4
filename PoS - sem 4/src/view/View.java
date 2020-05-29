@@ -24,6 +24,7 @@ public class View {
 	/**
 	 * Creates a new instance.
 	 * @param controller
+	 * @throws IOException if failed to initiate the error-log.
 	 */
 	public View(Controller controller) throws IOException {
 		this.controller = controller;
@@ -43,6 +44,8 @@ public class View {
 	 * 4040 - Pasta
 	 * 5050 - Coffee
 	 * 6060 - Cheese
+	 * 
+	 * 1234 - to simulate database-error
 	 * 
 	 */
 	public void userTestRun() {

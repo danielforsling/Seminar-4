@@ -8,8 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 /**
- * 
- *
+ *	This class logs the exceptions in this application. 
  */
 public class ExceptionLogHandler {
 
@@ -17,21 +16,26 @@ public class ExceptionLogHandler {
     private PrintWriter logFile;
     
 	/**
+	 * Creates an instance.
 	 * 
-	 * @throws IOException
+	 * @throws IOException when something failed with the textfile. 
 	 */
 	public ExceptionLogHandler() throws IOException {
             logFile = new PrintWriter(new FileWriter(LOG_FILE_NAME), true);
 	}
 	    
-	public void printExceptionToFile(Exception e) {
-    //	logFile.println(e.getMessage());
+	/**
+	 *  Prints an description of the thrown exception.
+	 *  
+	 * @param exception The exception to be logged.
+	 */
+	public void printExceptionToFile(Exception exception) {
     	StringBuilder logToBeSaved = new StringBuilder();
     	logToBeSaved.append(createTime());
         logToBeSaved.append(", Exception was thrown: ");
-        logToBeSaved.append(e.getMessage());
+        logToBeSaved.append(exception.getMessage());
         logFile.println(logToBeSaved);
-        e.printStackTrace(logFile);
+        exception.printStackTrace(logFile);
     }
 
     private String createTime() {

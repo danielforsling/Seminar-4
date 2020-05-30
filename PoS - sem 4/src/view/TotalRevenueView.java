@@ -1,16 +1,24 @@
 package view;
 
+import model.util.Amount;
+import model.util.TotalPriceObserver;
+
 /**
  * 
  *
  */
-public class TotalRevenueView {
+public class TotalRevenueView implements TotalPriceObserver{
 	
 	/**
-	 * 
+	 *  Creates an instance.
 	 */
 	public TotalRevenueView() {
-		// TODO Auto-generated constructor stub
+
+	}
+	
+	@Override
+	public void showTotalPrice(Amount paidAmount) {
+		
 	}
 
 }

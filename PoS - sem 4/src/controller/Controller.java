@@ -80,10 +80,7 @@ public class Controller {
 		ItemDescription itemToBeAdded = null;
 		try {
 			itemToBeAdded = inventory.findItem(itemID);
-		} catch (InvalidItemIDException e) {
-			throw e;
 		} catch (ExternalSystemsFailureException e) {
-			
 			throw new OperationFailedException("Lost connection to the External systems", e);
 		}
 		

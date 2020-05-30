@@ -17,7 +17,7 @@ public class TotalRevenueView implements TotalPriceObserver{
 	}
 	
 	@Override
-	public void showTotalPrice(Amount paidAmount) {
+	public void showTotalPrice(Amount totalPrice) {
 		
 	}
 

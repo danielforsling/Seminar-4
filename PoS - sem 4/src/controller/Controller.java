@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import integration.CreateSystems;
 import integration.DiscountSystem;
 import integration.ExternalAccountingSystem;
@@ -13,10 +14,12 @@ import model.DTO.PresentSaleDTO;
 import model.DTO.Receipt;
 import model.DTO.SaleInformation;
 import model.POS.CashRegister;
+import model.POS.ExternalDisplayDataHandler;
 import model.POS.Sale;
 import model.util.Amount;
 import model.util.Change;
 import model.util.TotalPrice;
+import model.util.TotalPriceObserver;
 
 /**
  * 	This class is the application's only controller. All calls from the view
@@ -33,6 +36,8 @@ public class Controller {
 	private CashRegister register;
 	private Sale sale;
 	private SaleInformation saleInfo;
+	
+	private ArrayList<TotalPriceObserver> totalPriceObservers = new ArrayList<>();
 	
 	/**
 	 * Creates an instance.
@@ -129,6 +134,17 @@ public class Controller {
 		
 		updateSystems();
 		printReceipt();
+		
+		new ExternalDisplayDataHandler(totalPriceObservers, saleInfo.getTotalPrice().getFinalPrice());
+	}
+	
+	/**
+	 * Adds ak
+	 * 
+	 * @param obs
+	 */
+	public void addTotalPriceObservers(TotalPriceObserver obs) {
+		totalPriceObservers.add(obs);
 	}
 	
 	private void updateSystems() {

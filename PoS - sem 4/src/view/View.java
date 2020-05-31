@@ -29,6 +29,7 @@ public class View {
 	public View(Controller controller) throws IOException {
 		this.controller = controller;
 		this.errorLog = new ExceptionLogHandler();
+		controller.addTotalPriceObservers(new TotalRevenueView() );
 		
 	}
 

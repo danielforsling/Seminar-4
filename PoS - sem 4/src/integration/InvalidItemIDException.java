@@ -1,8 +1,8 @@
 package integration;
 
 /**
- * Exception that will be thrown when trying to access the Inventory system with an
- * invalid itemID.
+ * Exception that will be thrown when trying to search the Inventory system with an
+ * non-existing itemID.
  *
  */
 public class InvalidItemIDException extends Exception {

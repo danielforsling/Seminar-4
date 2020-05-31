@@ -8,6 +8,7 @@ import model.DTO.PresentSaleDTO;
 import model.DTO.SaleInformation;
 import model.util.Amount;
 import model.util.TotalPrice;
+import model.util.TotalPriceObserver;
 
 /**
  * This class represents a purchase of goods made by a single customer. 
@@ -27,6 +28,7 @@ public class Sale {
 	{
 		saleTime = LocalTime.now();
 		totalPrice = new TotalPrice();
+		
 	}
 	
 	/**

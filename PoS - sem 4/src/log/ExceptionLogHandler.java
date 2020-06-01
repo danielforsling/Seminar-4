@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 /**
- *	This class logs the exceptions in this application. 
+ *	This class logs the exceptions that gets thrown in this application. 
  */
 public class ExceptionLogHandler {
 
@@ -31,17 +31,18 @@ public class ExceptionLogHandler {
 	 */
 	public void printExceptionToFile(Exception exception) {
     	StringBuilder logToBeSaved = new StringBuilder();
+    	logToBeSaved.append("Exception was thrown: ");
     	logToBeSaved.append(createTime());
-        logToBeSaved.append(", Exception was thrown: ");
+        logToBeSaved.append("\n");
         logToBeSaved.append(exception.getMessage());
         logFile.println(logToBeSaved);
         exception.printStackTrace(logFile);
     }
 
     private String createTime() {
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
-        return now.format(formatter);
+       // LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter timeAndDate = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+        return LocalDateTime.now().format(timeAndDate);
     }
     
 }

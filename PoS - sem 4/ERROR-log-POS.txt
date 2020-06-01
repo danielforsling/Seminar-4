@@ -1,4 +1,4 @@
-Exception was thrown: 2020-jun-01 12:42:21
+Exception was thrown: 2020-jun-01 20:29:25
 Lost connection to the External systems
 controller.OperationFailedException: Lost connection to the External systems
 	at controller.Controller.findItem(Controller.java:90)

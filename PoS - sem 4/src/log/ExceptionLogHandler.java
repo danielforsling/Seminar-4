@@ -40,7 +40,6 @@ public class ExceptionLogHandler {
     }
 
     private String createTime() {
-       // LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter timeAndDate = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
         return LocalDateTime.now().format(timeAndDate);
     }

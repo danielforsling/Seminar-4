@@ -9,25 +9,21 @@ import model.util.TotalPriceObserver;
  *	A class that has the purpose to notify all observers when the payment of the 
  *	current sale is finished. 
  */
-public class ExternalDisplayDataHandler {
+public class ObserverDataHandler {
 
 	private ArrayList<TotalPriceObserver> totalPriceObservers = new ArrayList<>();
-	private Amount totalPrice;
+	private Amount priceOfCurrentSale;
 
 	/**
 	 * 
-	 * @param observers
-	 * @param totalPrice
 	 */
-	public ExternalDisplayDataHandler(ArrayList<TotalPriceObserver> observers, Amount totalPrice) {
-		totalPriceObservers.addAll(observers);
-		this.totalPrice = totalPrice;
-		notifyObservers();
+	public ObserverDataHandler() {
+		
 	}
 
 	private void notifyObservers() {
 		for(TotalPriceObserver obs : totalPriceObservers)
-			obs.showTotalPrice(totalPrice);
+			obs.showTotalPrice(priceOfCurrentSale);
 	}
 	
 	/**
@@ -36,6 +32,11 @@ public class ExternalDisplayDataHandler {
 	 */
 	public void addTotalPriceObservers(ArrayList<TotalPriceObserver> observers) {
 		totalPriceObservers.addAll(observers);
+	}
+	
+	public void updateObservers(Amount totalPrice) {
+		priceOfCurrentSale = totalPrice;
+		notifyObservers();
 	}
 	
 }

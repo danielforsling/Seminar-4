@@ -88,7 +88,8 @@ public class View {
 				} catch(InvalidItemIDException e) {
 					errorMessages.showErrorMessage(e.getMessage());					
 				} catch(OperationFailedException oe) {
-					LocalExceptionHandler("Operation failed", oe);
+					LocalExceptionHandler("Operation failed,\nno connection with\nexternal systems.\n"
+											+"Please try again ", oe);
 				}
 			}
 				

@@ -86,9 +86,9 @@ class ControllerTest {
 		int invalidItemID = 1111;
 		try {
 			ItemDescription returnedItem = inventory.findItem(invalidItemID);
-			fail("Could enter invalid id");
+			fail("Could find an item with invalid id");
 		}catch (InvalidItemIDException e) {
-			assertTrue(e.getInvalidItemID() == invalidItemID," Correct");
+			assertTrue(e.getInvalidItemID() == invalidItemID," Correct Exception thrown");
 		} 
 	}
 	
@@ -98,9 +98,9 @@ class ControllerTest {
 		int invalidItemID = 2222;
 			try {
 				controllerToTest.findItem(invalidItemID, 4);
-				fail("Could enter invalid id");
+				fail("Could find an item invalid id");
 			}catch (InvalidItemIDException e) {
-				assertTrue(e.getInvalidItemID() == invalidItemID," Correct");
+				assertTrue(e.getInvalidItemID() == invalidItemID," Correct Exception thrown");
 			} 
 		}
 	
@@ -113,7 +113,7 @@ class ControllerTest {
 			ItemDescription returnedItem = inventory.findItem(dbErrorID);
 			fail("Connection works, this message should not be printed.");
 		}catch (Exception e) {
-			assertTrue(e.getClass().equals(expectedException.getClass())," Correct");
+			assertTrue(e.getClass().equals(expectedException.getClass())," Correct Exception thrown");
 		} 
 	}
 	
@@ -122,13 +122,14 @@ class ControllerTest {
 						throws OperationFailedException {
 		
 		int dbErrorID = 1234;
-		ExternalSystemsFailureException innerException = new ExternalSystemsFailureException("Error message");
-		OperationFailedException expectedException = new OperationFailedException("error message", innerException);
+		String msg = "Error message";
+		ExternalSystemsFailureException innerException = new ExternalSystemsFailureException(msg);
+		OperationFailedException expectedException = new OperationFailedException(msg, innerException);
 		try {
 				controllerToTest.findItem(dbErrorID, 7);
 				fail("Connection works, this message should not be printed.");
 			}catch (Exception e) {
-				assertTrue(e.getClass().equals(expectedException.getClass())," Correct");
+				assertTrue(e.getClass().equals(expectedException.getClass())," Correct Exception thrown");
 			} 
 		}
 	

@@ -14,7 +14,7 @@ import model.DTO.PresentSaleDTO;
 import model.DTO.Receipt;
 import model.DTO.SaleInformation;
 import model.POS.CashRegister;
-import model.POS.ExternalDisplayDataHandler;
+import model.POS.ObserverDataHandler;
 import model.POS.Sale;
 import model.util.Amount;
 import model.util.Change;
@@ -38,6 +38,7 @@ public class Controller {
 	private SaleInformation saleInfo;
 	
 	private ArrayList<TotalPriceObserver> totalPriceObservers = new ArrayList<>();
+	private ObserverDataHandler dataHandler = new ObserverDataHandler();
 	
 	/**
 	 * Creates an instance.
@@ -133,9 +134,7 @@ public class Controller {
 		createFinalSaleInformation(change.getChange(), amountPaid);
 		
 		updateSystems();
-		printReceipt();
 		
-		new ExternalDisplayDataHandler(totalPriceObservers, saleInfo.getTotalPrice().getFinalPrice());
 	}
 	
 	/**
@@ -145,12 +144,15 @@ public class Controller {
 	 */
 	public void addTotalPriceObservers(TotalPriceObserver obs) {
 		totalPriceObservers.add(obs);
+		dataHandler.addTotalPriceObservers(totalPriceObservers);
 	}
 	
 	private void updateSystems() {
 		inventory.updateInventory(saleInfo);
 		accounting.updateAccounting(saleInfo);
 		saleLog.storeSaleInformation(0, saleInfo);
+		printReceipt();
+		dataHandler.updateObservers(saleInfo.getTotalPrice().getFinalPrice());
 	}
 	
 	/**

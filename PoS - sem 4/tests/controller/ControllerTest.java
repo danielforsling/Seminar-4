@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import integration.CreateSystems;
 import integration.ExternalInventorySystem;
+import integration.ExternalSystemsFailureException;
 import integration.InvalidItemIDException;
 import integration.ItemDescription;
 import integration.Printer;
@@ -19,9 +20,9 @@ import model.POS.Sale;
 import model.util.TotalPrice;
 
 class ControllerTest {
-	private CreateSystems systems = new CreateSystems(); 
-	private Printer printer  = new Printer(); 
-	private Controller controllerToTest = new Controller(systems, printer);
+	private CreateSystems systems; 
+	private Printer printer; 
+	private Controller controllerToTest;
 	
 	private ExternalInventorySystem inventory;
 	private Sale sale;
@@ -79,6 +80,59 @@ class ControllerTest {
 		}
 		assertEquals(expectedItemName, returnedItem.getName(), "Wrong item recieved from inventory.");
 	}
+	
+	@Test
+	void testInvalidItemIDException () {
+		int invalidItemID = 1111;
+		try {
+			ItemDescription returnedItem = inventory.findItem(invalidItemID);
+			fail("Could enter invalid id");
+		}catch (InvalidItemIDException e) {
+			assertTrue(e.getInvalidItemID() == invalidItemID," Correct");
+		} 
+	}
+	
+	@Test 
+	void testInvalidItemIDExceptionWithControllerInstance()
+						throws OperationFailedException {
+		int invalidItemID = 2222;
+			try {
+				controllerToTest.findItem(invalidItemID, 4);
+				fail("Could enter invalid id");
+			}catch (InvalidItemIDException e) {
+				assertTrue(e.getInvalidItemID() == invalidItemID," Correct");
+			} 
+		}
+	
+	@Test
+	void testExternalSystemFailureException () {
+		int dbErrorID = 1234;
+		ExternalSystemsFailureException expectedException = new ExternalSystemsFailureException("Error message");
+		
+		try {
+			ItemDescription returnedItem = inventory.findItem(dbErrorID);
+			fail("Connection works, this message should not be printed.");
+		}catch (Exception e) {
+			assertTrue(e.getClass().equals(expectedException.getClass())," Correct");
+		} 
+	}
+	
+	@Test 
+	void testIfControllerMethodThrowsCorrectException()
+						throws OperationFailedException {
+		
+		int dbErrorID = 1234;
+		ExternalSystemsFailureException innerException = new ExternalSystemsFailureException("Error message");
+		OperationFailedException expectedException = new OperationFailedException("error message", innerException);
+		try {
+				controllerToTest.findItem(dbErrorID, 7);
+				fail("Connection works, this message should not be printed.");
+			}catch (Exception e) {
+				assertTrue(e.getClass().equals(expectedException.getClass())," Correct");
+			} 
+		}
+	
+	
 	
 
 }

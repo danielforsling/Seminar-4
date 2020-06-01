@@ -1,0 +1,12 @@
+Exception was thrown: 2020-jun-01 09:59:10
+Lost connection to the External systems
+controller.OperationFailedException: Lost connection to the External systems
+	at controller.Controller.findItem(Controller.java:89)
+	at view.View.userScanningItems(View.java:87)
+	at view.View.userTestRun(View.java:57)
+	at startup.Main.main(Main.java:27)
+Caused by: integration.ExternalSystemsFailureException: Connection to the Inventory System could not be established.
+Please contact the System administrator
+	at integration.ExternalInventorySystem.findItem(ExternalInventorySystem.java:42)
+	at controller.Controller.findItem(Controller.java:87)
+	... 3 more

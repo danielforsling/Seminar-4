@@ -21,7 +21,6 @@ public class InvalidItemIDException extends Exception {
 	}
 	
 	/**
-	 * 
 	 * @return The invalid ID.
 	 */
 	public int getInvalidItemID() {

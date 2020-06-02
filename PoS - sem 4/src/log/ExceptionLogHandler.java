@@ -18,7 +18,7 @@ public class ExceptionLogHandler {
 	/**
 	 * Creates an instance.
 	 * 
-	 * @throws IOException when something failed with the textfile. 
+	 * @throws IOException when something failed initiating the textfile. 
 	 */
 	public ExceptionLogHandler() throws IOException {
             logFile = new PrintWriter(new FileWriter(LOG_FILE_NAME), true);

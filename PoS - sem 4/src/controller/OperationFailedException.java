@@ -8,9 +8,10 @@ package controller;
 public class OperationFailedException extends Exception {
 
 	/**
-	 * 
-	 * @param message
-	 * @param cause
+	 *  Creates an instance.
+	 *  
+	 * @param message The message explaining the Exception
+	 * @param cause The previously caught exception
 	 */
 	public OperationFailedException(String message, Exception cause) {
 		super(message, cause);

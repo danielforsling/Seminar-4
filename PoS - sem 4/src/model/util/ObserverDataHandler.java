@@ -1,9 +1,8 @@
-package model.POS;
+package model.util;
 
 import java.util.ArrayList;
 
-import model.util.Amount;
-import model.util.TotalPriceObserver;
+import model.DTO.SaleInformation;
 
 /**
  *	A class that has the purpose to notify all observers when the payment of the 
@@ -15,7 +14,7 @@ public class ObserverDataHandler {
 	private Amount priceOfCurrentSale;
 
 	/**
-	 * 
+	 * Creates an instance.
 	 */
 	public ObserverDataHandler() {
 		
@@ -27,15 +26,21 @@ public class ObserverDataHandler {
 	}
 	
 	/**
+	 * Adds the list of observers to the current instance.
 	 * 
-	 * @param observers
+	 * @param observers to be added.
 	 */
 	public void addTotalPriceObservers(ArrayList<TotalPriceObserver> observers) {
 		totalPriceObservers.addAll(observers);
 	}
 	
-	public void updateObservers(Amount totalPrice) {
-		priceOfCurrentSale = totalPrice;
+	/**
+	 *  Retrieves the Total price from the current sale and notifies the observers.
+	 *  
+	 * @param saleInfo Containing information of the sale.
+	 */
+	public void updateObservers(SaleInformation saleInfo) {
+		priceOfCurrentSale = saleInfo.getTotalPrice().getFinalPrice();
 		notifyObservers();
 	}
 	

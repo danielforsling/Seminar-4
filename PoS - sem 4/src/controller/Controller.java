@@ -14,10 +14,10 @@ import model.DTO.PresentSaleDTO;
 import model.DTO.Receipt;
 import model.DTO.SaleInformation;
 import model.POS.CashRegister;
-import model.POS.ObserverDataHandler;
 import model.POS.Sale;
 import model.util.Amount;
 import model.util.Change;
+import model.util.ObserverDataHandler;
 import model.util.TotalPrice;
 import model.util.TotalPriceObserver;
 
@@ -138,9 +138,10 @@ public class Controller {
 	}
 	
 	/**
-	 * Adds ak
+	 * Adds an Observer to the ArrayList in the instance and also in the observed class
+	 * {@link ObserverDataHandler}. 
 	 * 
-	 * @param obs
+	 * @param obs The Observer interface to be added.
 	 */
 	public void addTotalPriceObservers(TotalPriceObserver obs) {
 		totalPriceObservers.add(obs);
@@ -152,7 +153,7 @@ public class Controller {
 		accounting.updateAccounting(saleInfo);
 		saleLog.storeSaleInformation(0, saleInfo);
 		printReceipt();
-		dataHandler.updateObservers(saleInfo.getTotalPrice().getFinalPrice());
+		dataHandler.updateObservers(saleInfo);
 	}
 	
 	/**
